@@ -4,10 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Flight Tracker</title>
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     html, body, #map {
       height: 100%;
@@ -24,11 +21,28 @@
       font-size: 14px;
       z-index: 1000;
     }
+    #start-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 1000;
+      padding: 10px 14px;
+      font-size: 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #start-btn:hover {
+      background: #0056b3;
+    }
   </style>
 </head>
 <body>
   <div id="map"></div>
-  <div id="info">Initializing...</div>
+  <div id="info">Press "Start Tracking" to enable GPS.</div>
+  <button id="start-btn">Start Tracking</button>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="main.js"></script>
