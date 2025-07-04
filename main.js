@@ -1,10 +1,11 @@
 const airportLat = 51.605; // Swansea Airport
 const airportLng = -4.067;
 
+// Initialize map
 const map = L.map("map").setView([airportLat, airportLng], 12);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  attribution: "© OpenStreetMap contributors",
+  attribution: "© OpenStreetMap contributors"
 }).addTo(map);
 
 const airportMarker = L.marker([airportLat, airportLng])
@@ -58,41 +59,10 @@ function updatePosition(position) {
   }
 
   const { distance, bearing } = computeDistanceAndBearing(
-    airportLat,
-    airportLng,
-    latitude,
-    longitude
+    airportLat, airportLng, latitude, longitude
   );
 
   document.getElementById("info").innerHTML = `
     <strong>Aircraft Position</strong><br/>
     Lat: ${latitude.toFixed(5)}<br/>
-    Lng: ${longitude.toFixed(5)}<br/>
-    Altitude: ${altitude ? altitude.toFixed(0) + " m" : "N/A"}<br/>
-    Speed: ${speed ? (speed * 3.6).toFixed(1) + " km/h" : "N/A"}<br/>
-    Heading: ${heading ? heading.toFixed(0) + "°" : "N/A"}<br/>
-    <strong>Relative to Swansea Airport</strong><br/>
-    Distance: ${(distance / 1000).toFixed(2)} km<br/>
-    Bearing: ${bearing.toFixed(1)}°
-  `;
-
-  map.setView([latitude, longitude]);
-}
-
-function error(err) {
-  let message = `Error: ${err.message}`;
-  if (err.code === 1) {
-    message += " (Permission denied. Enable GPS for this site.)";
-  }
-  document.getElementById("info").innerText = message;
-}
-
-document.getElementById("start-btn").addEventListener("click", () => {
-  navigator.geolocation.watchPosition(updatePosition, error, {
-    enableHighAccuracy: true,
-    maximumAge: 1000,
-    timeout: 5000
-  });
-
-  document.getElementById("start-btn").style.display = "none";
-});
+    Lng: ${longitude.toFixe
