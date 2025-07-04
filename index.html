@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Flight Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flight Tracker PWA</title>
+  <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     html, body, #map {
@@ -14,12 +15,13 @@
       position: absolute;
       top: 10px;
       left: 10px;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255,255,255,0.95);
       padding: 10px;
       border-radius: 8px;
       font-family: sans-serif;
       font-size: 14px;
       z-index: 1000;
+      max-width: 280px;
     }
     #start-btn {
       position: absolute;
@@ -46,5 +48,14 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').then(() => {
+          console.log('Service Worker Registered');
+        });
+      });
+    }
+  </script>
 </body>
 </html>
