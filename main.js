@@ -22,7 +22,7 @@ function toDegrees(rad) {
 }
 
 function computeDistanceAndBearing(lat1, lon1, lat2, lon2) {
-  const R = 6371e3; // Earth radius in meters
+  const R = 6371e3;
   const φ1 = toRadians(lat1);
   const φ2 = toRadians(lat2);
   const Δφ = toRadians(lat2 - lat1);
@@ -51,8 +51,7 @@ function updatePosition(position) {
         iconUrl: "https://cdn-icons-png.flaticon.com/512/2972/2972532.png",
         iconSize: [32, 32],
         iconAnchor: [16, 16]
-      }),
-      rotationAngle: heading || 0,
+      })
     }).addTo(map);
   } else {
     aircraftMarker.setLatLng([latitude, longitude]);
@@ -81,11 +80,19 @@ function updatePosition(position) {
 }
 
 function error(err) {
-  document.getElementById("info").innerText = `Error: ${err.message}`;
+  let message = `Error: ${err.message}`;
+  if (err.code === 1) {
+    message += " (Permission denied. Enable GPS for this site.)";
+  }
+  document.getElementById("info").innerText = message;
 }
 
-navigator.geolocation.watchPosition(updatePosition, error, {
-  enableHighAccuracy: true,
-  maximumAge: 1000,
-  timeout: 5000
+document.getElementById("start-btn").addEventListener("click", () => {
+  navigator.geolocation.watchPosition(updatePosition, error, {
+    enableHighAccuracy: true,
+    maximumAge: 1000,
+    timeout: 5000
+  });
+
+  document.getElementById("start-btn").style.display = "none";
 });
